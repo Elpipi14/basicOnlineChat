@@ -21,12 +21,13 @@ const io = new Server(httpServer);
 import { loadMessages, saveMessages, addMessage } from "./fileSystem/data.js";
 
 io.on("connection", (socket)=>{
-  console.log(`connected client ${socket.id}`);
-  socket.on('disconnect', () => console.log(`client disconnect ${socket.id}`));
+  // console.log(`connected client ${socket.id}`);
+  // socket.on('disconnect', () => console.log(`client disconnect ${socket.id}`));
 
   socket.on("message", (data)=>{
-    //recibo la data del chat de los cliente y lo guardo en json con filesystem
+    //recibo la data del chat de los cliente 
     addMessage(data);
+    //Enviamos la data del chat para los clientes
     io.emit("messageLogs", loadMessages());
   });
 
